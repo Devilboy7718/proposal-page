@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Marry Me?</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      font-family: 'Arial', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .content {
+      text-align: center;
+      z-index: 10;
+      position: relative;
+      animation: fadeInUp 3s ease-out;
+    }
+
+    h1 {
+      font-size: 4rem;
+      animation: bounceIn 2s ease;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 3s infinite;
+      animation-delay: 1s;
+      animation-timing-function: ease-in-out;
+    }
+    
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -25px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -25px;
+    }
+
+    .star {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 1.5s infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-300px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-10px) scale(2);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: translateY(-200px);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(30px);
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>Hey Sunanda,</h1>
+    <p>I've been thinking a lot lately, and there's something I really want to ask...</p>
+    <p style="font-size: 2rem; font-weight: bold;">Will you marry me?</p>
+  </div>
+
+  <div class="heart"></div>
+
+  <!-- Create random sparkles in the background -->
+  <script>
+    // Function to generate random stars
+    function createStars() {
+      const starCount = 30;  // Adjust number of stars
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        document.body.appendChild(star);
+
+        // Remove star after animation to prevent clutter
+        setTimeout(() => {
+          star.remove();
+        }, 1500);
+      }
+    }
+
+    // Create sparkles continuously
+    setInterval(createStars, 500);
+
+    // After a few seconds, show the proposal message
+    setTimeout(() => {
+      alert("Sunanda, will you marry me?");
+    }, 4000);
+  </script>
+
+</body>
+</html>
