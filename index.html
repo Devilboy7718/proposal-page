@@ -36,6 +36,13 @@
       animation: fadeIn 3s ease-out;
     }
 
+    .emoji {
+      font-size: 50px;
+      position: absolute;
+      animation: bounce 2s infinite;
+      opacity: 0;
+    }
+
     .heart {
       position: absolute;
       top: 50%;
@@ -44,9 +51,7 @@
       height: 50px;
       background: red;
       transform: rotate(45deg);
-      animation: float 3s infinite;
-      animation-delay: 1s;
-      animation-timing-function: ease-in-out;
+      animation: float 3s infinite ease-in-out;
     }
     
     .heart::before, .heart::after {
@@ -112,6 +117,21 @@
       }
     }
 
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(-20px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+    }
+
     @keyframes bounceIn {
       0% {
         transform: translateY(-200px);
@@ -152,27 +172,28 @@
 
   <div class="heart"></div>
 
-  <!-- Create random sparkles in the background -->
+  <!-- Create random emojis (hearts, stars, smileys) in the background -->
   <script>
-    // Function to generate random stars
-    function createStars() {
-      const starCount = 30;  // Adjust number of stars
-      for (let i = 0; i < starCount; i++) {
-        const star = document.createElement("div");
-        star.className = "star";
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        document.body.appendChild(star);
+    const emojis = ["❤️", "🌟", "💫", "😊", "💖", "😘"];
+    
+    // Function to generate random emojis
+    function createEmojis() {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = `${Math.random() * 100}%`;
+      emoji.style.top = `${Math.random() * 100}%`;
+      emoji.style.animationDelay = `${Math.random() * 3}s`;
+      document.body.appendChild(emoji);
 
-        // Remove star after animation to prevent clutter
-        setTimeout(() => {
-          star.remove();
-        }, 1500);
-      }
+      // Remove emoji after animation
+      setTimeout(() => {
+        emoji.remove();
+      }, 2000);
     }
 
-    // Create sparkles continuously
-    setInterval(createStars, 500);
+    // Create emojis continuously
+    setInterval(createEmojis, 500);
 
     // After a few seconds, show the proposal message
     setTimeout(() => {
